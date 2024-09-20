@@ -1,4 +1,9 @@
 using Company.Data.Contexts;
+using Company.Data.Models;
+using Company.Repository.Interfaces;
+using Company.Repository.Repositories;
+using Company.Services.Interfaces;
+using Company.Services.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace Company.Web
@@ -16,6 +21,11 @@ namespace Company.Web
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+            //builder.Services.AddScoped<IGenirecRepository<Employee>, GenirecRepository<Employee>>();
+            //builder.Services.AddScoped<IGenirecRepository<Department>, GenirecRepository<Department>>();
 
             var app = builder.Build();
 

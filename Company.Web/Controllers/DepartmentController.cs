@@ -1,19 +1,41 @@
-﻿using Company.Repository.Interfaces;
+﻿using Company.Data.Models;
+using Company.Repository.Interfaces;
+using Company.Services.Interfaces;
+using Company.Services.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Company.Web.Controllers
 {
     public class DepartmentController : Controller
     {
-        private readonly IDepartmentRepository _departmentRepository;
-        public DepartmentController(IDepartmentRepository departmentRepository)
+        private readonly IDepartmentService _departmentService;
+        public DepartmentController(IDepartmentService departmentService)
         {
-            _departmentRepository = departmentRepository;
+            _departmentService = departmentService;
         }
         public IActionResult Index()
         {
-            var dept = _departmentRepository.GetAll();
+            var dept = _departmentService.GetAll();
             return View(dept);
+        }
+
+        public IActionResult Create(Department department)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _departmentService.Add(department);
+                    return RedirectToAction(nameof(Index));
+                }
+                ModelState.AddModelError("DepartmentError", "ValidationErrors");
+                return View(department);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("DepartmentError",ex.Message);
+                return View(department);
+            }
         }
     }
 }

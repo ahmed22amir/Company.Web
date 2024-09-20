@@ -21,9 +21,8 @@ namespace Company.Web
             });
             builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
-
-            builder.Services.AddScoped<IGenirecRepository<Employee>, GenirecRepository<Employee>>();
-            builder.Services.AddScoped<IGenirecRepository<Department>, GenirecRepository<Department>>();
+            builder.Services.AddSingleton<IGenirecRepository<Employee>, GenirecRepository<Employee>>();
+            builder.Services.AddTransient<IGenirecRepository<Department>, GenirecRepository<Department>>();
 
             var app = builder.Build();
 

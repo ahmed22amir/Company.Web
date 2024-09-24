@@ -14,5 +14,8 @@ namespace Company.Repository.Interfaces
         //void Add(Employee employee);
         //void Update(Employee employee);
         //void Delete(Employee employee);
+
+        public IEnumerable<Employee> GetEmployeeByName(string name);
+        public IEnumerable<Employee> GetEmployeeByAddress(string address);
     }
 }

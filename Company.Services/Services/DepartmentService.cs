@@ -49,7 +49,17 @@ namespace Company.Services.Services
 
         public void Update(Department department)
         {
-            throw new NotImplementedException();
+            var dept = GetById(department.ID);
+            if (dept.Name == department.Name)
+            { 
+                if(GetAll().Any(x=>x.Name == department.Name))
+                {
+                    throw new Exception("DulicatedDepartment");
+                }
+            }
+            dept.Name = department.Name;
+            dept.Code = department.Code;
+            _departmentRepository.Update(dept);
         }
     }
 }

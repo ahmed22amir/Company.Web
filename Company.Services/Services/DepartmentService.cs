@@ -29,7 +29,7 @@ namespace Company.Services.Services
 
         public IEnumerable<Department> GetAll()
         {
-            var dept = _departmentRepository.GetAll();
+            var dept = _departmentRepository.GetAll().Where(x=>x.IsDeleted != true);
             return dept;
         }
 

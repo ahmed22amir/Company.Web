@@ -1,4 +1,5 @@
 ﻿using Company.Data.Models;
+using Company.Services.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace Company.Services.Interfaces
 {
     public interface IDepartmentService
     {
-        Department GetById(int? id);
+        DepartmentDto GetById(int? id);
         IEnumerable<Department> GetAll();
-        void Add(Department department);
-        void Update(Department department);
-        void Delete(Department department);
+        void Add(DepartmentDto department);
+        //void Update(DepartmentDto department);
+        void Delete(DepartmentDto department);
     }
 }

@@ -1,9 +1,9 @@
-﻿@model Employee
+﻿@model EmployeeDto
 @{
-    var departments = new SelectList(ViewBag.Departments, nameof(Department.ID), nameof(Department.Name));
+    var departments = new SelectList(ViewBag.Departments, nameof(DepartmentDto.Id), nameof(DepartmentDto.Name));
 }
 
-<form asp-action="Create">
+<form asp-action="Create" enctype="multipart/form-data">
     <div class="form-group">
         <label class="col-form-label" asp-for="Name"></label>
         <input type="text" asp-for="Name" class="form-control" />
@@ -37,15 +37,15 @@
         <label class="col-form-label" asp-for="HiringDate"></label>
         <input type="date" asp-for="HiringDate" class="form-control" />
     </div>
-    @* <div class="form-group">
+    <div class="form-group">
         <label class="col-form-label" asp-for="Department"></label>
         <select class="form-control" asp-items="@departments" asp-for="DepartmentID">
-            <option value="@departments" >--Select Department</option>
+            <option value="@null" >--Select Department</option>
         </select>
-    </div> *@
+    </div>
     <div class="form-group">
-        <label class="col-form-label" asp-for="ImgUrl"></label>
-        <input type="file" class="form-control-file" asp-for="ImgUrl" />
+        <label class="col-form-label" asp-for="Image"></label>
+        <input type="file" class="form-control-file" asp-for="Image" />
     </div>
     <div class="form-group">
         <input type="submit" value="Create" class="btn btn-primary" />

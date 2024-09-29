@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace Company.Services.Dto
         public string email { get; set; }
         public string PhoneNumber { get; set; }
         public DateTime HiringDate { get; set; }
+        public IFormFile Image { get; set; }
         public string ImgUrl { get; set; }
         public DepartmentDto Department { get; set; }
         public int? DepartmentID { get; set; }

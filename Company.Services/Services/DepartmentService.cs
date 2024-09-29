@@ -17,6 +17,10 @@ namespace Company.Services.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
+        public DepartmentService()
+        {
+        }
+
         public DepartmentService(IUnitOfWork unitOfWork , IMapper mapper) 
         {
             _unitOfWork = unitOfWork;
@@ -48,7 +52,7 @@ namespace Company.Services.Services
             _unitOfWork.Compelet();
         }
 
-        public IEnumerable<DepartmentDto> GetAll()
+        public IEnumerable<Department> GetAll()
         {
             var dept = _unitOfWork.DepartmentRepository.GetAll()/*.Where(x=>x.IsDeleted != true)*/;
             //var MappedDepartment = dept.Select(x => new DepartmentDto
@@ -56,8 +60,8 @@ namespace Company.Services.Services
             //    Code=x.Code,
             //    Name = x.Name,
             //});
-            IEnumerable<DepartmentDto> MappedDepartment = _mapper.Map<IEnumerable<DepartmentDto>>(dept);
-            return MappedDepartment;
+            //IEnumerable<DepartmentDto> MappedDepartment = _mapper.Map<IEnumerable<DepartmentDto>>(dept);
+            return dept;
         }
 
         public DepartmentDto GetById(int? id)

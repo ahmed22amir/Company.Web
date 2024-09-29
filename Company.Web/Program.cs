@@ -4,6 +4,7 @@ using Company.Repository.Interfaces;
 using Company.Repository.Repositories;
 using Company.Services.Interfaces;
 using Company.Services.Services;
+using Company.Services.Mapping;
 using Microsoft.EntityFrameworkCore;
 
 namespace Company.Web
@@ -23,9 +24,12 @@ namespace Company.Web
             });
             //builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             //builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IDepartmentService, DepartmentService>();
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
-            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            builder.Services.AddAutoMapper(x => x.AddProfile(new EmployeeProfile()));
+            builder.Services.AddAutoMapper(x => x.AddProfile(new DepartmentProfile()));
             //builder.Services.AddScoped<IGenirecRepository<Employee>, GenirecRepository<Employee>>();
             //builder.Services.AddScoped<IGenirecRepository<Department>, GenirecRepository<Department>>();
 

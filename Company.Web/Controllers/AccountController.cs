@@ -1,4 +1,5 @@
-﻿using Company.Data.Models;
+﻿using Company.Data.Migrations;
+using Company.Data.Models;
 using Company.Services.Helper;
 using Company.Web.Models;
 using Microsoft.AspNetCore.Identity;
@@ -121,6 +122,34 @@ namespace Company.Web.Controllers
         {
             return View();
         }
+
+        public IActionResult ResetPassword(string Email , string Token)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if (user is not null)
+                {
+                    var Res = await _userManager.ResetPasswordAsync(user,model.Token,model.Password);
+                    if(Res.Succeeded)
+                    {
+                        return RedirectToAction(nameof(SignIn));
+                    }
+
+                    foreach (var err in Res.Errors)
+                    {
+                        ModelState.AddModelError("", err.Description);
+                    }
+                }
+            }
+                    return View(model);
+        } 
 
     }
 }

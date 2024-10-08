@@ -1,0 +1,12 @@
+﻿@model RoleViewModel
+
+<div class="form-group">
+    <label asp-for="@Model.name" class="col-form-label"></label>
+    <input asp-for="@Model.name" class="form-control" />
+    <span asp-validation-for="@Model.name" class="text-danger"></span>
+</div>
+<br />
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

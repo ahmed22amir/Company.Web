@@ -97,5 +97,33 @@ namespace Company.Web.Controllers
             }
             return View(appUserUpdate);
         }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            try
+            {
+                var user = await _userManager.FindByIdAsync(id);
+                if(user is null)
+                {
+                    return NotFound();
+                }
+
+                var res = await _userManager.DeleteAsync(user);
+
+                if (res.Succeeded)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                foreach (var item in res.Errors)
+                {
+                    _logger.LogError(item.Description);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
